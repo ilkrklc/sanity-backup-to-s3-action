@@ -14,13 +14,13 @@ importers:
       '@actions/exec':
         specifier: ^1.1.1
         version: 1.1.1
-      '@actions/github':
-        specifier: ^6.0.0
-        version: 6.0.0
     devDependencies:
       '@types/node':
         specifier: ^22.5.5
         version: 22.5.5
+      '@vercel/ncc':
+        specifier: ^0.38.1
+        version: 0.38.1
       sanity:
         specifier: ^3.57.3
         version: 3.57.3(@types/node@22.5.5)(@types/react@18.3.6)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
@@ -35,9 +35,6 @@ packages:
 
   '@actions/exec@1.1.1':
     resolution: {integrity: sha512-+sCcHHbVdk93a0XT19ECtO/gIXoxvdsgQLzb2fE2/5sIZmWQuluYyjPQtrtTHdU1YzTZ7bAPN4sITq2xi1679w==}
-
-  '@actions/github@6.0.0':
-    resolution: {integrity: sha512-alScpSVnYmjNEXboZjarjukQEzgCRmjMv6Xj47fsdnqGS73bjJNDpiiXmp8jr0UZLdUB6d9jW63IcmddUP+l0g==}
 
   '@actions/http-client@2.2.3':
     resolution: {integrity: sha512-mx8hyJi/hjFvbPokCg4uRd4ZX78t+YyRPtnKWwIl+RzNaVuFpQHfmlGVfsKEJN8LwTCvL+DfVgAM04XaHkm6bA==}
@@ -1069,54 +1066,6 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@octokit/auth-token@4.0.0':
-    resolution: {integrity: sha512-tY/msAuJo6ARbK6SPIxZrPBms3xPbfwBrulZe0Wtr/DIY9lje2HeV1uoebShn6mx7SjCHif6EjMvoREj+gZ+SA==}
-    engines: {node: '>= 18'}
-
-  '@octokit/core@5.2.0':
-    resolution: {integrity: sha512-1LFfa/qnMQvEOAdzlQymH0ulepxbxnCYAKJZfMci/5XJyIHWgEYnDmgnKakbTh7CH2tFQ5O60oYDvns4i9RAIg==}
-    engines: {node: '>= 18'}
-
-  '@octokit/endpoint@9.0.5':
-    resolution: {integrity: sha512-ekqR4/+PCLkEBF6qgj8WqJfvDq65RH85OAgrtnVp1mSxaXF03u2xW/hUdweGS5654IlC0wkNYC18Z50tSYTAFw==}
-    engines: {node: '>= 18'}
-
-  '@octokit/graphql@7.1.0':
-    resolution: {integrity: sha512-r+oZUH7aMFui1ypZnAvZmn0KSqAUgE1/tUXIWaqUCa1758ts/Jio84GZuzsvUkme98kv0WFY8//n0J1Z+vsIsQ==}
-    engines: {node: '>= 18'}
-
-  '@octokit/openapi-types@20.0.0':
-    resolution: {integrity: sha512-EtqRBEjp1dL/15V7WiX5LJMIxxkdiGJnabzYx5Apx4FkQIFgAfKumXeYAqqJCj1s+BMX4cPFIFC4OLCR6stlnA==}
-
-  '@octokit/openapi-types@22.2.0':
-    resolution: {integrity: sha512-QBhVjcUa9W7Wwhm6DBFu6ZZ+1/t/oYxqc2tp81Pi41YNuJinbFRx8B133qVOrAaBbF7D/m0Et6f9/pZt9Rc+tg==}
-
-  '@octokit/plugin-paginate-rest@9.2.1':
-    resolution: {integrity: sha512-wfGhE/TAkXZRLjksFXuDZdmGnJQHvtU/joFQdweXUgzo1XwvBCD4o4+75NtFfjfLK5IwLf9vHTfSiU3sLRYpRw==}
-    engines: {node: '>= 18'}
-    peerDependencies:
-      '@octokit/core': '5'
-
-  '@octokit/plugin-rest-endpoint-methods@10.4.1':
-    resolution: {integrity: sha512-xV1b+ceKV9KytQe3zCVqjg+8GTGfDYwaT1ATU5isiUyVtlVAO3HNdzpS4sr4GBx4hxQ46s7ITtZrAsxG22+rVg==}
-    engines: {node: '>= 18'}
-    peerDependencies:
-      '@octokit/core': '5'
-
-  '@octokit/request-error@5.1.0':
-    resolution: {integrity: sha512-GETXfE05J0+7H2STzekpKObFe765O5dlAKUTLNGeH+x47z7JjXHfsHKo5z21D/o/IOZTUEI6nyWyR+bZVP/n5Q==}
-    engines: {node: '>= 18'}
-
-  '@octokit/request@8.4.0':
-    resolution: {integrity: sha512-9Bb014e+m2TgBeEJGEbdplMVWwPmL1FPtggHQRkV+WVsMggPtEkLKPlcVYm/o8xKLkpJ7B+6N8WfQMtDLX2Dpw==}
-    engines: {node: '>= 18'}
-
-  '@octokit/types@12.6.0':
-    resolution: {integrity: sha512-1rhSOfRa6H9w4YwK0yrf5faDaDTb+yLyBUKOCV4xtCDB5VmIPqd/v9yr9o6SAzOAlRxMiRiCic6JVM1/kunVkw==}
-
-  '@octokit/types@13.5.0':
-    resolution: {integrity: sha512-HdqWTf5Z3qwDVlzCrP8UJquMwunpDiMPt5er+QjGzL4hqr/vBVY/MauQgS1xWxCDT1oMx1EULyqxncdCY/NVSQ==}
-
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
     engines: {node: '>=14'}
@@ -1430,6 +1379,10 @@ packages:
   '@types/uuid@8.3.4':
     resolution: {integrity: sha512-c/I8ZRb51j+pYGAu5CrFMRxqZ2ke4y2grEBO5AUjgSkSk+qT2Ea+OdWElz/OiMf5MNpn2b17kuVBwZLQJXzihw==}
 
+  '@vercel/ncc@0.38.1':
+    resolution: {integrity: sha512-IBBb+iI2NLu4VQn3Vwldyi2QwaXt5+hTyh58ggAMoCGE6DJmPvwL3KPBWcJl1m9LYPChBLE980Jw+CS4Wokqxw==}
+    hasBin: true
+
   '@vitejs/plugin-react@4.3.1':
     resolution: {integrity: sha512-m/V2syj5CuVnaxcUJOQRel/Wr31FFXRFlnOoq1TVtkCxsY5veGMTEmpWHndrhB2U8ScHtCQB1e+4hWYExQc6Lg==}
     engines: {node: ^14.18.0 || >=16.0.0}
@@ -1523,9 +1476,6 @@ packages:
 
   base64-js@1.5.1:
     resolution: {integrity: sha512-AKpaYlHn8t4SVbOHCy+b5+KKgvR4vrsD8vbvrbiQJps7fKDTkjkDry6ji0rUJjC0kzbNePLwzxq8iypo41qeWA==}
-
-  before-after-hook@2.2.3:
-    resolution: {integrity: sha512-NzUnlZexiaH/46WDhANlyR2bXRopNg4F/zuSA3OpZnllCUgRaOF2znDioDWrmbNVsuZk6l9pMquQB38cfBZwkQ==}
 
   bidi-js@1.0.3:
     resolution: {integrity: sha512-RKshQI1R3YQ+n9YJz2QQ147P66ELpa1FQEg20Dk8oW9t2KgLbpDLLp9aGZ7y8WHSshDknG0bknqGw5/tyCs5tw==}
@@ -1854,9 +1804,6 @@ packages:
   delayed-stream@1.0.0:
     resolution: {integrity: sha512-ZySD7Nf91aLB0RxL4KGrKHBXl7Eds1DAmEdcoVawXnLD7SDhpNgtuII2aAkg7a7QS41jxPSZ17p4VdGnMHk3MQ==}
     engines: {node: '>=0.4.0'}
-
-  deprecation@2.3.1:
-    resolution: {integrity: sha512-xmHIy4F3scKVwMsQ4WnVaS8bHOx0DmVwRywosKhaILI0ywMDWPtBSku2HNxRvF7jtwDRsoEwYQSfbxj8b7RlJQ==}
 
   detect-node-es@1.1.0:
     resolution: {integrity: sha512-ypdmJU/TbBby2Dxibuv7ZLW3Bs1QEmM7nHjEANfohJLvE0XVujisn1qPJcZxg+qDucsr+bP6fLD1rPS3AhJ7EQ==}
@@ -3443,9 +3390,6 @@ packages:
   unist-util-visit-parents@3.1.1:
     resolution: {integrity: sha512-1KROIZWo6bcMrZEwiH2UrXDyalAa0uqzWCxCJj6lPOvTve2WkfgCytoDTPaMnodXh1WrXOq0haVYHj99ynJlsg==}
 
-  universal-user-agent@6.0.1:
-    resolution: {integrity: sha512-yCzhz6FN2wU1NiiQRogkTQszlQSlpWaw8SvVegAc+bDxbzHgh1vX8uIe8OYyMH6DwH+sdTJsgMl36+mSMdRJIQ==}
-
   universalify@0.2.0:
     resolution: {integrity: sha512-CJ1QgKmNg3CwvAv/kOFmtnEN05f0D/cn9QntgNOQlQF9dgvVTHj3t+8JPdjqawCHk7V/KA+fbUqzZ9XWhcqPUg==}
     engines: {node: '>= 4.0.0'}
@@ -3675,13 +3619,6 @@ snapshots:
   '@actions/exec@1.1.1':
     dependencies:
       '@actions/io': 1.1.3
-
-  '@actions/github@6.0.0':
-    dependencies:
-      '@actions/http-client': 2.2.3
-      '@octokit/core': 5.2.0
-      '@octokit/plugin-paginate-rest': 9.2.1(@octokit/core@5.2.0)
-      '@octokit/plugin-rest-endpoint-methods': 10.4.1(@octokit/core@5.2.0)
 
   '@actions/http-client@2.2.3':
     dependencies:
@@ -4800,68 +4737,10 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.17.1
 
-  '@octokit/auth-token@4.0.0': {}
-
-  '@octokit/core@5.2.0':
-    dependencies:
-      '@octokit/auth-token': 4.0.0
-      '@octokit/graphql': 7.1.0
-      '@octokit/request': 8.4.0
-      '@octokit/request-error': 5.1.0
-      '@octokit/types': 13.5.0
-      before-after-hook: 2.2.3
-      universal-user-agent: 6.0.1
-
-  '@octokit/endpoint@9.0.5':
-    dependencies:
-      '@octokit/types': 13.5.0
-      universal-user-agent: 6.0.1
-
-  '@octokit/graphql@7.1.0':
-    dependencies:
-      '@octokit/request': 8.4.0
-      '@octokit/types': 13.5.0
-      universal-user-agent: 6.0.1
-
-  '@octokit/openapi-types@20.0.0': {}
-
-  '@octokit/openapi-types@22.2.0': {}
-
-  '@octokit/plugin-paginate-rest@9.2.1(@octokit/core@5.2.0)':
-    dependencies:
-      '@octokit/core': 5.2.0
-      '@octokit/types': 12.6.0
-
-  '@octokit/plugin-rest-endpoint-methods@10.4.1(@octokit/core@5.2.0)':
-    dependencies:
-      '@octokit/core': 5.2.0
-      '@octokit/types': 12.6.0
-
-  '@octokit/request-error@5.1.0':
-    dependencies:
-      '@octokit/types': 13.5.0
-      deprecation: 2.3.1
-      once: 1.4.0
-
-  '@octokit/request@8.4.0':
-    dependencies:
-      '@octokit/endpoint': 9.0.5
-      '@octokit/request-error': 5.1.0
-      '@octokit/types': 13.5.0
-      universal-user-agent: 6.0.1
-
-  '@octokit/types@12.6.0':
-    dependencies:
-      '@octokit/openapi-types': 20.0.0
-
-  '@octokit/types@13.5.0':
-    dependencies:
-      '@octokit/openapi-types': 22.2.0
-
   '@pkgjs/parseargs@0.11.0':
     optional: true
 
-  '@portabletext/editor@1.1.0(@sanity/block-tools@3.57.3(debug@4.3.7))(@sanity/schema@3.57.3(debug@4.3.7))(@sanity/types@3.57.3(debug@4.3.7))(@sanity/util@3.57.3(debug@4.3.7))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
+  '@portabletext/editor@1.1.0(@sanity/block-tools@3.57.3)(@sanity/schema@3.57.3)(@sanity/types@3.57.3(debug@4.3.7))(@sanity/util@3.57.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))':
     dependencies:
       '@portabletext/patches': 1.1.0
       '@sanity/block-tools': 3.57.3(debug@4.3.7)
@@ -5361,6 +5240,8 @@ snapshots:
 
   '@types/uuid@8.3.4': {}
 
+  '@vercel/ncc@0.38.1': {}
+
   '@vitejs/plugin-react@4.3.1(vite@4.5.3(@types/node@22.5.5))':
     dependencies:
       '@babel/core': 7.25.2
@@ -5467,8 +5348,6 @@ snapshots:
     optional: true
 
   base64-js@1.5.1: {}
-
-  before-after-hook@2.2.3: {}
 
   bidi-js@1.0.3:
     dependencies:
@@ -5815,8 +5694,6 @@ snapshots:
   define-lazy-prop@2.0.0: {}
 
   delayed-stream@1.0.0: {}
-
-  deprecation@2.3.1: {}
 
   detect-node-es@1.1.0: {}
 
@@ -7079,7 +6956,7 @@ snapshots:
       '@dnd-kit/sortable': 7.0.2(@dnd-kit/core@6.1.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1))(react@18.3.1)
       '@dnd-kit/utilities': 3.2.2(react@18.3.1)
       '@juggle/resize-observer': 3.4.0
-      '@portabletext/editor': 1.1.0(@sanity/block-tools@3.57.3(debug@4.3.7))(@sanity/schema@3.57.3(debug@4.3.7))(@sanity/types@3.57.3(debug@4.3.7))(@sanity/util@3.57.3(debug@4.3.7))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
+      '@portabletext/editor': 1.1.0(@sanity/block-tools@3.57.3)(@sanity/schema@3.57.3)(@sanity/types@3.57.3(debug@4.3.7))(@sanity/util@3.57.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(rxjs@7.8.1)(styled-components@6.1.13(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
       '@portabletext/react': 3.1.0(react@18.3.1)
       '@rexxars/react-json-inspector': 8.0.1(react@18.3.1)
       '@sanity/asset-utils': 1.3.0
@@ -7546,8 +7423,6 @@ snapshots:
     dependencies:
       '@types/unist': 2.0.11
       unist-util-is: 4.1.0
-
-  universal-user-agent@6.0.1: {}
 
   universalify@0.2.0: {}
 
