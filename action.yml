@@ -1,4 +1,5 @@
 name: 'Sanity Backup to S3'
+author: 'Ilker Kilic'
 description: 'Backup Sanity dataset to S3'
 inputs:
   sanity_project_id:
@@ -17,7 +18,9 @@ inputs:
     description: 'Number of days to retain backups. Backups older than this will be deleted. Default is 0 (no deletion).'
     required: false
     default: '0'
-
 runs:
   using: 'node20'
   main: 'dist/index.js'
+branding:
+  icon: 'upload-cloud'
+  color: 'purple'
