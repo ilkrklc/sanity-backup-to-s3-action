@@ -1,0 +1,23 @@
+name: 'Sanity Backup to S3'
+description: 'Backup Sanity dataset to S3'
+inputs:
+  sanity_project_id:
+    description: 'Sanity Project ID'
+    required: true
+  sanity_auth_token:
+    description: 'Sanity Authentication Token'
+    required: true
+  s3_bucket:
+    description: 'S3 Bucket to upload backups'
+    required: true
+  dataset_name:
+    description: 'The name of the Sanity dataset to be exported and backed up (e.g., development or production)'
+    required: true
+  retention_days:
+    description: 'Number of days to retain backups. Backups older than this will be deleted. Default is 0 (no deletion).'
+    required: false
+    default: '0'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'

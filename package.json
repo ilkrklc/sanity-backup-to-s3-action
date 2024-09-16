@@ -1,0 +1,28 @@
+{
+  "name": "sanity-backup-to-s3-action",
+  "version": "0.1.0",
+  "description": "A GitHub Action to backup Sanity CMS datasets to an AWS S3 bucket. Automatically exports datasets and uploads them to specified S3 locations for backup purposes.",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc"
+  },
+  "author": "Ilker Kilic",
+  "license": "MIT",
+  "keywords": [
+    "github-action",
+    "sanity",
+    "sanity-backup",
+    "aws-s3"
+  ],
+  "packageManager": "pnpm@9.5.0+sha512.140036830124618d624a2187b50d04289d5a087f326c9edfc0ccd733d76c4f52c3a313d4fc148794a2a9d81553016004e6742e8cf850670268a7387fc220c903",
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/exec": "^1.1.1",
+    "@actions/github": "^6.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.5.5",
+    "sanity": "^3.57.3",
+    "typescript": "^5.6.2"
+  }
+}

@@ -1,0 +1,32 @@
+name: Test Action
+
+on: [push]
+
+jobs:
+  test-action:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-central-1
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Build Action
+        run: npm run build
+
+      - name: Run Backup Action
+        uses: ./
+        with:
+          sanity_project_id: ${{ secrets.SANITY_PROJECT_ID }}
+          sanity_auth_token: ${{ secrets.SANITY_AUTH_TOKEN }}
+          s3_bucket: ${{ secrets.S3_BUCKET }}
+          dataset_name: ${{ secrets.DATASET_NAME }}
+          retention_days: 1
