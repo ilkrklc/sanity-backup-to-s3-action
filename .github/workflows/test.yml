@@ -30,3 +30,4 @@ jobs:
           s3_bucket: ${{ secrets.S3_BUCKET }}
           dataset_name: ${{ secrets.DATASET_NAME }}
           retention_days: 1
+          verbose: true

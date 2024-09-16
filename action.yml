@@ -18,6 +18,10 @@ inputs:
     description: 'Number of days to retain backups. Backups older than this will be deleted. Default is 0 (no deletion).'
     required: false
     default: '0'
+  verbose:
+    description: 'Enable verbose logging for detailed output'
+    required: false
+    default: 'false'
 runs:
   using: 'node20'
   main: 'dist/index.js'

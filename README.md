@@ -11,6 +11,7 @@ This GitHub Action allows you to backup a specific Sanity dataset to an AWS S3 b
 | `s3_bucket`         | The AWS S3 bucket where the dataset backup will be uploaded.                                           | true     |
 | `dataset_name`      | The name of the Sanity dataset to be exported (e.g., `development`).                                   | true     |
 | `retention_days`    | Number of days to retain backups. Backups older than this will be deleted. Default is 0 (no deletion). | false    |
+| `verbose`           | Enable verbose logging. Set to `true` for detailed output.                                             | false    |
 
 ## Usage
 
@@ -45,13 +46,14 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Run Backup Action
-        uses: ilkrklc/sanity-backup-to-s3-action@v1.0.0
+        uses: ilkrklc/sanity-backup-to-s3-action@v1
         with:
           sanity_project_id: ${{ secrets.SANITY_PROJECT_ID }}
           sanity_auth_token: ${{ secrets.SANITY_AUTH_TOKEN }}
           s3_bucket: ${{ secrets.S3_BUCKET }}
           dataset_name: ${{ secrets.SANITY_DATASET_NAME }}
           retention_days: '30' # Retain backups for 30 days
+          verbose: 'true' # Enable verbose logging
 ```
 
 ## How It Works
@@ -65,6 +67,7 @@ jobs:
 - **Sanity CLI**: This action uses `sanity` command to interact with your Sanity project, so ensure that the Sanity CLI is available in the environment.
 - **AWS Credentials**: The action requires AWS credentials to upload the backup to S3. You can use `aws-actions/configure-aws-credentials@v4` for authentication.
 - **Retention**: Be cautious when using the `retention_days` feature as it will permanently delete backups older than the specified number of days.
+- **Verbose Logging**: You can enable verbose logging by setting the `verbose` input to `true`. This will provide detailed logs for debugging purposes.
 
 ## License
 
