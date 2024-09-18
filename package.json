@@ -1,6 +1,6 @@
 {
   "name": "sanity-backup-to-s3-action",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A GitHub Action to backup Sanity CMS datasets to an AWS S3 bucket. Automatically exports datasets and uploads them to specified S3 locations for backup purposes.",
   "main": "dist/index.js",
   "scripts": {
