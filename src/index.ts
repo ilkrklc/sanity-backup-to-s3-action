@@ -1,4 +1,4 @@
-import { debug, getInput, info, setFailed } from '@actions/core';
+import { getInput, info, setFailed } from '@actions/core';
 import { exec } from '@actions/exec';
 import { existsSync } from 'fs';
 import { basename } from 'path';
@@ -12,7 +12,7 @@ async function checkSanityDatasetExistence(
   let datasetListOutput = '';
 
   if (verbose) {
-    debug(
+    info(
       `Checking if the dataset "${datasetName}" exists in the Sanity project...`,
     );
   }
@@ -34,7 +34,7 @@ async function checkSanityDatasetExistence(
   const datasets = datasetListOutput.split('\n').map((line) => line.trim());
 
   if (verbose) {
-    debug(`Found ${datasets.length} datasets in the Sanity project.`);
+    info(`Found ${datasets.length} datasets in the Sanity project.`);
   }
 
   if (!datasets.includes(datasetName)) {
@@ -44,7 +44,7 @@ async function checkSanityDatasetExistence(
   }
 
   if (verbose) {
-    debug(`Dataset "${datasetName}" exists.`);
+    info(`Dataset "${datasetName}" exists.`);
   }
 }
 
@@ -53,7 +53,7 @@ function checkAwsCredentials(verbose: boolean): void {
   const awsSecretAccessKey = process.env.AWS_SECRET_ACCESS_KEY;
 
   if (verbose) {
-    debug('Checking AWS credentials...');
+    info('Checking AWS credentials...');
   }
 
   if (!awsAccessKeyId || !awsSecretAccessKey) {
@@ -63,7 +63,7 @@ function checkAwsCredentials(verbose: boolean): void {
   }
 
   if (verbose) {
-    debug('AWS credentials are set.');
+    info('AWS credentials are set.');
   }
 }
 
@@ -82,9 +82,7 @@ async function removeOldBackups(
   const retentionTimestamp =
     new Date().getTime() - retentionDays * 24 * 60 * 60 * 1000;
 
-  info(
-    `Removing backups older than ${retentionDays} days from s3://${s3Bucket}/${datasetName}/`,
-  );
+  info('Checking for old backups...');
 
   let awsListOutput = '';
   await exec(`aws s3 ls s3://${s3Bucket}/${datasetName}/`, [], {
@@ -101,9 +99,9 @@ async function removeOldBackups(
     .map((line) => line.trim())
     .filter(Boolean);
 
-  if (verbose) {
-    debug(`Found ${backupFiles.length} backup files in the S3 bucket.`);
-  }
+  info(
+    `Found ${backupFiles.length} backup files. Checking against retention policy...`,
+  );
 
   let deletedCount = 0;
   for (const file of backupFiles) {
@@ -113,11 +111,11 @@ async function removeOldBackups(
       const fileName = file.split(' ').pop();
 
       if (verbose) {
-        debug(`Processing file: ${fileName}, Date: ${match[0]}`);
+        info(`Processing file: ${fileName}, Date: ${match[0]}`);
       }
 
       if (fileDate < retentionTimestamp) {
-        debug(`Removing old backup: ${fileName}`);
+        info(`Removing old backup: ${fileName}`);
 
         await exec(
           `aws s3 rm s3://${s3Bucket}/${datasetName}/${fileName}`,
@@ -126,8 +124,8 @@ async function removeOldBackups(
         );
 
         deletedCount += 1;
-      } else if (verbose) {
-        debug(`Skipping file: ${fileName}, as it is within retention period.`);
+      } else {
+        info(`Skipping file: ${fileName}, as it is within retention period.`);
       }
     }
   }
@@ -146,10 +144,7 @@ async function run() {
     const s3Bucket = getInput('s3_bucket', { required: true });
     const datasetName = getInput('dataset_name', { required: true });
     const retentionDays = parseInt(getInput('retention_days') || '0', 10);
-    const verbose = getInput('verbose') === 'true'; // Convert to boolean
-
-    const today = new Date().toISOString().split('T')[0];
-    const datasetFileName = `backups/${datasetName}-${today}.tar.gz`;
+    const verbose = getInput('verbose') === 'true';
 
     info('Starting Sanity dataset backup process...');
 
@@ -160,9 +155,10 @@ async function run() {
       verbose,
     );
 
-    if (verbose) {
-      debug(`Exporting dataset "${datasetName}"...`);
-    }
+    info('Exporting dataset...');
+
+    const now = new Date().toISOString().replace(/[:]/g, '-').split('.')[0];
+    const datasetFileName = `backups/${datasetName}-${now}.tar.gz`;
 
     await exec(
       `npx sanity dataset export ${datasetName} ${datasetFileName}`,
@@ -185,9 +181,7 @@ async function run() {
     const s3Key = `${datasetName}/${basename(datasetFileName)}`;
 
     if (verbose) {
-      debug(
-        `Uploading backup to S3 bucket "${s3Bucket}" with key "${s3Key}"...`,
-      );
+      info('Uploading backup to S3 bucket...');
     }
 
     await exec(`aws s3 cp ${datasetFileName} s3://${s3Bucket}/${s3Key}`, [], {
